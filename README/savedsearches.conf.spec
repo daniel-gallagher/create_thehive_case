@@ -13,7 +13,7 @@ action.create_thehive_case.param.description = <string>
 
 action.create_thehive_case.param.severity = [0|1|2|3]
 * The severity of the new case. 1 = low, 2 = medium, 3 = high
-* Default is "2" (medium)
+* Default is "1" (low)
 * (optional)
 
 action.create_thehive_case.param.owner = <string>
@@ -23,7 +23,7 @@ action.create_thehive_case.param.owner = <string>
 action.create_thehive_case.param.tlp = [-1|0|1|2|3]
 * Traffic Light Protocol for this case. 0 = White, 1 = Green, 2 = Amber, 3 = Red
 * TLP affects releasability of information. Some analyzers will not be available on higher TLP settings.
-* Defaults to "-1" (unset)
+* Defaults to "2" (Amber)
 * (optional)
 
 action.create_thehive_case.param.tags = <string>
