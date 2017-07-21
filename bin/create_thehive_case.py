@@ -12,14 +12,13 @@ import requests
 import uuid
 from requests.auth import HTTPBasicAuth
 
-def create_alert(config, row):
+def create_case(config, row):
 	print >> sys.stderr, "DEBUG Creating case with config %s" % config
 
 	url = config.get('url') # Get TheHive URL from Splunk configuration
 	username = config.get('username') # Get TheHive username from Splunk configuration
 	password = config.get('password') # Get TheHive password from Splunk configuration
 	auth = requests.auth.HTTPBasicAuth(username=username,password=password)
-	sourceRef = str(uuid.uuid4())[0:6] # Generate unique identifier for alert
 
 	# Filter empty multivalue fields
 	row = {key: value for key, value in row.iteritems() if not key.startswith("__mv_")}
@@ -30,23 +29,20 @@ def create_alert(config, row):
 		artifacts.append(dict(
 			dataType = key,
 			data = value,
-			message = "%s observed in this alert" % key
+			message = "%s observed in this Splunk alert" % key
 		))
 
-	# Get the payload for the alert from the config, use defaults if they are not specified
+	# Get the payload for the case from the config, use defaults if they are not specified
 	payload = json.dumps(dict(
 		title = config.get('title'),
 		description = config.get('description', "No description provided."),
+		severity = int(config.get('severity', 1)),
+		owner = config.get('owner'),
+		tlp = int(config.get('tlp', 2)),
 		tags = [] if config.get('tags') is None else config.get('tags').split(","), # capable of continuing if Tags is empty and avoids split failing on empty list
-		severity = int(config.get('severity', 2)),
-		tlp = int(config.get('tlp', -1)),
-		type = config.get('type', "alert"),
-		artifacts = artifacts,
-		source = config.get('source', "splunk"),
-		caseTemplate = config.get('caseTemplate', "default"),
-		sourceRef = sourceRef
+		artifacts = artifacts
 	))
-	# actually send the request to create the alert; fail gracefully
+	# actually send the request to create the case; fail gracefully
 	try:
 		print >> sys.stderr, 'INFO Calling url="%s" with payload=%s' % (url, payload)
 		# set proper headers
@@ -57,13 +53,13 @@ def create_alert(config, row):
 		# check if status is anything other than 200; throw an exception if it is
 		response.raise_for_status()
 		# response is 200 by this point or we would have thrown an exception
-		print >> sys.stderr, "INFO theHive server response: %s" % response.json()
+		print >> sys.stderr, "INFO TheHive server response: %s" % response.json()
 	# somehow we got a bad response code from thehive
 	except requests.exceptions.HTTPError as e:
-		print >> sys.stderr, "ERROR theHive server returned following error: %s" % e
+		print >> sys.stderr, "ERROR TheHive server returned following error: %s" % e
 	# some other request error occurred
 	except requests.exceptions.RequestException as e:
-		print >> sys.stderr, "ERROR Error creating alert: %s" % e
+		print >> sys.stderr, "ERROR Error creating case: %s" % e
 
 
 if __name__ == "__main__":
@@ -89,7 +85,7 @@ if __name__ == "__main__":
 					# iterate through each row, creating a alert for each and then adding the observables from that row to the alert that was created
 					for row in reader:
 						# make the alert with predefined function; fail gracefully
-						create_alert(config, row)
+						create_case(config, row)
 				# by this point - all alerts should have been created with all necessary observables attached to each one
 				# we can gracefully exit now
 				sys.exit(0)
