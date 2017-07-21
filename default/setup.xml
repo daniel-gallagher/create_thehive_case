@@ -4,7 +4,7 @@
     </block>
     <block title="Server" endpoint="admin/alert_actions" entity="create_thehive_case">
         <input field="param.url">
-            <label>Server URL (ex. http://server.com/api/case)</label>
+            <label>Server URL (ex. http://server.com:9000)</label>
             <type>text</type>
         </input>
         <input field="param.username">
