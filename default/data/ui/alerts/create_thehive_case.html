@@ -1,89 +1,63 @@
 <!DOCTYPE html>
 <form class="form-horizontal form-complex">
-    <div class="control-group">
-        <label class="control-label" for="create_thehive_case_caseTemplate">Case Template</label>
-
-        <div class="controls">
-            <input type="text" name="action.create_thehive_case.param.caseTemplate" id="create_thehive_case_caseTemplate" required />
-            <span class="help-block">
-              The case template to use for imported alerts.
-            </span>
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label" for="create_thehive_case_type">Type</label>
-
-        <div class="controls">
-            <input type="text" name="action.create_thehive_case.param.type" id="create_thehive_case_type" required />
-            <span class="help-block">
-              The alert type. Defaults to "alert".
-            </span>
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label" for="create_thehive_case_source">Source</label>
-
-        <div class="controls">
-            <input type="text" name="action.create_thehive_case.param.source" id="create_thehive_case_source" required />
-            <span class="help-block">
-              The alert source. Defaults to "splunk".
-            </span>
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label" for="create_thehive_case_title">Title</label>
-
-        <div class="controls">
-            <input type="text" name="action.create_thehive_case.param.title" id="create_thehive_case_title" required>$name$</text>
-            <span class="help-block">
-              The title to use for created alerts.
-            </span>
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label" for="create_thehive_case_description">Description</label>
-
-        <div class="controls">
-            <textarea name="action.create_thehive_case.param.description" id="create_thehive_case_description" required>$description$</textarea>
-            <span class="help-block">
-                The description to send with the alert.
-            </span>
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label" for="create_thehive_case_tags">Tags</label>
-
-        <div class="controls">
-            <input type="text" name="action.create_thehive_case.param.tags" id="create_thehive_case_tags" />
-            <span class="help-block">
-                Use single comma-separated string without quotes for multiple tags (ex. "badIP,spam").
-            </span>
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label" for="create_thehive_case_severity">Severity</label>
-
-        <div class="controls">
-            <select id="create_thehive_case_severity" name="action.create_thehive_case.param.severity">
-                <option value="1">Low</option>
-                <option value="2">Medium</option>
-                <option value="3">High</option>
-            </select>
-            <span class="help-block">Change the severity of the created alert.</span>
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label" for="create_thehive_case_tlp">TLP</label>
-
-        <div class="controls">
-            <select id="create_thehive_case_tlp" name="action.create_thehive_case.param.tlp">
-                <option value="-1">None</option>
-                <option value="0">White</option>
-                <option value="1">Green</option>
-                <option value="2">Amber</option>
-                <option value="3">Red</option>
-            </select>
-            <span class="help-block">Change the TLP of the created alert.</span>
-        </div>
-    </div>
+  <div class="control-group">
+      <label class="control-label" for="create_thehive_case_title">Title</label>
+      <div class="controls">
+          <input type="text" name="action.create_thehive_case.param.title" id="create_thehive_case_title" required></text>
+          <span class="help-block">
+            The title to use for created cases.
+          </span>
+      </div>
+  </div>
+  <div class="control-group">
+      <label class="control-label" for="create_thehive_case_description">Description</label>
+      <div class="controls">
+          <textarea name="action.create_thehive_case.param.description" id="create_thehive_case_description" required></textarea>
+          <span class="help-block">
+              The description to send with the case.
+          </span>
+      </div>
+  </div>
+  <div class="control-group">
+      <label class="control-label" for="create_thehive_case_severity">Severity</label>
+      <div class="controls">
+          <select id="create_thehive_case_severity" name="action.create_thehive_case.param.severity">
+              <option value="1">Low</option>
+              <option value="2">Medium</option>
+              <option value="3">High</option>
+          </select>
+          <span class="help-block">Change the severity of the created case.</span>
+      </div>
+  </div>
+  <div class="control-group">
+      <label class="control-label" for="create_thehive_case_owner">Owner</label>
+      <div class="controls">
+          <input type="text" name="action.create_thehive_case.param.owner" id="create_thehive_case_owner" />
+          <span class="help-block">
+            The case owner. Defaults to user name that creates the case.
+          </span>
+      </div>
+  </div>
+  <div class="control-group">
+      <label class="control-label" for="create_thehive_case_tlp">TLP</label>
+      <div class="controls">
+          <select id="create_thehive_case_tlp" name="action.create_thehive_case.param.tlp">
+              <option value="-1">None</option>
+              <option value="0">White</option>
+              <option value="1">Green</option>
+              <option value="2">Amber</option>
+              <option value="3">Red</option>
+          </select>
+          <span class="help-block">Change the TLP of the created case.</span>
+      </div>
+  </div>
+  <div class="control-group">
+      <label class="control-label" for="create_thehive_case_tags">Tags</label>
+      <div class="controls">
+          <input type="text" name="action.create_thehive_case.param.tags" id="create_thehive_case_tags" />
+          <span class="help-block">
+              Use single comma-separated string without quotes for multiple tags (ex. "badIP,spam").
+          </span>
+      </div>
+  </div>
 </form>
