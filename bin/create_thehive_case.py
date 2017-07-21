@@ -13,7 +13,7 @@ import uuid
 from requests.auth import HTTPBasicAuth
 
 def create_alert(config, row):
-	print >> sys.stderr, "DEBUG Creating alert with config %s" % config
+	print >> sys.stderr, "DEBUG Creating case with config %s" % config
 
 	url = config.get('url') # Get TheHive URL from Splunk configuration
 	username = config.get('username') # Get TheHive username from Splunk configuration

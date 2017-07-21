@@ -2,7 +2,7 @@
   <block title="Custom Alerts">
         <text>Configure TheHive Server Settings</text>
     </block>
-    <block title="Server" endpoint="admin/alert_actions" entity="create_thehive_alert">
+    <block title="Server" endpoint="admin/alert_actions" entity="create_thehive_case">
         <input field="param.url">
             <label>Server URL (ex. http://server.com/api/alert)</label>
             <type>text</type>

@@ -10,7 +10,7 @@
 # NOTE: This file and the corresponding setup.xml file are
 # optional components.
 
-[create_thehive_alert]
+[create_thehive_case]
 param.url = <string>
 param.username = <string>
 param.password = <string>
