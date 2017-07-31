@@ -49,7 +49,7 @@ def create_case(csv_rows, config):
     try:
         print >> sys.stderr, 'INFO Calling url="%s" with payload=%s' % (url, payload)
 
-        response = requests.post(url, headers=headers, data=payload, auth=auth, verify=False) # POST case to TheHive API
+        response = requests.post(url=url + "/api/case", headers=headers, data=payload, auth=auth, verify=False) # POST case to TheHive API
         if response.status_code == 201:
             print >> sys.stderr, (json.dumps(response.json(), indent=4, sort_keys=True))
             print >> sys.stderr, ('')
