@@ -1,8 +1,5 @@
 #!/usr/bin/env python
 
-# most of the code here was based on the following example on splunk custom alert actions
-# http://docs.splunk.com/Documentation/Splunk/6.5.3/AdvancedDev/ModAlertsAdvancedExample
-
 import os
 import sys
 import json
@@ -27,7 +24,7 @@ def create_case(csv_rows, config):
         severity = int(config.get('severity', 1)),
         owner = config.get('owner'),
         tlp = int(config.get('tlp', 2)),
-        tags = [] if config.get('tags') is None else config.get('tags').split(",") # capable of continuing if Tags is empty and avoids split failing on empty list
+        tags = [] if config.get('tags') is None else config.get('tags').split(",")
     ))
 
     print >> sys.stderr, 'INFO csv_rows="%s"' % (csv_rows)
@@ -36,7 +33,6 @@ def create_case(csv_rows, config):
     parsed_rows = {key: value for key, value in csv_rows.iteritems() if not key.startswith("__mv_")}
     print >> sys.stderr, 'INFO parsed_rows="%s"' % (parsed_rows)
 
-    # Take KV pairs and make a list-type of dicts
     artifacts = []
     for key, value in parsed_rows.iteritems():
         artifacts.append(dict(
@@ -49,7 +45,7 @@ def create_case(csv_rows, config):
     try:
         print >> sys.stderr, 'INFO Calling url="%s" with payload=%s' % (url, payload)
 
-        response = requests.post(url=url + "/api/case", headers=headers, data=payload, auth=auth, verify=False) # POST case to TheHive API
+        response = requests.post(url=url + "/api/case", headers=headers, data=payload, auth=auth, verify=False)
         if response.status_code == 201:
             print >> sys.stderr, (json.dumps(response.json(), indent=4, sort_keys=True))
             print >> sys.stderr, ('')
