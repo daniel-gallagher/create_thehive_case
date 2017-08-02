@@ -57,7 +57,7 @@ def create_case(csv_rows, config):
         else:
             print >> sys.stderr, ('ERROR Status Code: {} Message: {}'.format(response.status_code, response.text))
 
-        observ_url = url + "/%s/artifact" % (case_id)
+        observ_url = url + "/api/case/%s/artifact" % (case_id)
 
         response = requests.post(observ_url, headers=headers, data=artifacts, auth=auth, verify=False) # POST observables to the case
         if response.status_code == 201:
